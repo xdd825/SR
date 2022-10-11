@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ZH" class="no-js">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="shortcut icon" href="../static/image/icon.png">
+	<meta name="author" content="codepixer">
+	<meta charset="UTF-8">
+
+	<title>聲紋辨識系統</title>
+
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/linearicons.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+	<link rel="stylesheet" href="../static/css/nice-select.css">
+	<link rel="stylesheet" href="../static/css/animate.min.css">
+	<link rel="stylesheet" href="../static/css/owl.carousel.css">
+	<link rel="stylesheet" href="../static/css/asrdemo.css">
+	<link rel="stylesheet" href="../static/css/bootstrap-slider.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+	<section class="feature-area">
+			<div class="feature-inner row">
+				<div class="col-lg-12 col-md-12">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+					        <h3 class="panel-title">【聲 紋 註 冊 與 辨 識】 </h3>
+					    </div>
+					    <div class="panel-body">
+							<div class="row">
+								<div class="col-lg-6">
+									<h4>1、聲紋註冊</h4>
+									<br> -> -> 輸入註冊者名稱為您註冊說話者語音. </br>
+									<p class="lead">請點擊【聲紋註冊】，念出下方範例文字，錄製語音 (時間15s)。</p>
+										<div class="input-group">
+											<input type="text" class="form-control" id="printName" placeholder="請輸入註冊名稱">
+										</div>
+										<br><button type="button" class="btn btn-info" onclick="textgt()">文字生成</button>
+										<button type="button" class="btn btn-info" onclick="speechRecorder()">聲紋註冊</button><br><br>
+
+									<h4>2、聲紋辨識</h4> 
+										<br> -> -> 說話者錄音後與聲紋庫進行比對回傳辨識結果. </br>
+										<p class="lead">請點擊【聲紋辨識】, 念出下方範例文字，錄製語音 (時間3s)。</p>
+										<button type="button" class="btn btn-success" onclick="textgt1()">文字生成</button>
+										<button type="button" class="btn btn-success" onclick="recognizeSpeech();clifSpeech()">聲紋辨識</button><br><br>
+								
+									<h4>3、範例文字</h4>
+										<p class="lead">請點擊【文字生成】,錄音範例文字隨機生成。</p>
+								</div>
+								<div class="col-lg-6">
+									<div class="alert alert-info" style="height: 80px"><p style="font-weight: bolder" id="RecoName"></p> </div>
+								</div>
+
+								<div class="col-lg-6">
+									<div class="alert alert-info" style="height: 80px"><p style="font-weight: bolder" id="recogName"></p> </div>
+								</div>
+
+								<div class="col-lg-6">
+									<div class="alert alert-info" style="height: 80px"><p style="font-weight: bolder" id="clifName"></p> </div>
+							</div>
+							</div>
+					    </div>
+					</div>
+				</div>
+		
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer-area section-gap">
+ 		<div class="container">
+			<div class="footer-bottom row align-items-center">
+				<p class="footer-text m-0 col-lg-5 col-md-5">
+				Copyright &copy; 2022.athena .All rights reserved.<a target="_blank" href="#"></a>
+				</p>
+			</div> 
+		</div>
+	</footer>
+
+	<div id="back-top">
+		<a title="Go to Top" href="#"></a>
+	</div>
+
+	<script src="../static/js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
+	<script src="../static/js/easing.min.js"></script>
+	<script src="../static/js/hoverIntent.js"></script>
+	<script src="../static/js/superfish.min.js"></script>
+	<script src="../static/js/jquery.ajaxchimp.min.js"></script>
+	<script src="../static/js/jquery.magnific-popup.min.js"></script>
+	<script src="../static/js/owl.carousel.min.js"></script>
+	<script src="../static/js/owl-carousel-thumb.min.js"></script>
+	<script src="../static/js/jquery.sticky.js"></script>
+	<script src="../static/js/jquery.nice-select.min.js"></script>
+	<script src="../static/js/parallax.min.js"></script>
+	<script src="../static/js/waypoints.min.js"></script>
+	<script src="../static/js/wow.min.js"></script>
+	<script src="../static/js/jquery.counterup.min.js"></script>
+	<script src="../static/js/mail-script.js"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+	<script src="../static/layer/layer.js"></script>
+	<script src="../static/js/bootstrap-slider.min.js"></script>
+	<script src="../static/js/HZRecorder.js"></script>
+	<script src="../static/js/ttsdemo.js"></script>
+	<script src="../static/js/toast.js"></script>
+	<script src="../static/js/jquery.jplayer.min.js"></script>
+    
+	<script type="text/javascript">
+
+	    var recorder;
+	    function get(id) {
+	        return document.getElementById(id);
+	    }
+
+	    var elButton = get("record"),
+	            elTime = get("time");
+	        audio = document.querySelector('audio');
+
+	    var isStart = true, time = 60, timer;
+
+
+		//倒數計時
+		function updateTimer() {
+			$('#record_text').text("結束" + (--time) + "s");
+			if((time)==0){
+				elButton.click();
+			}
+		}
+		//更新按鈕
+    function updateButton() {
+        isStart = !isStart;
+        time
+        elTime.innerHTML = "";
+        if(isStart){
+            $('#record_status').css("background","url(../static/image/ic_microphone_24px.png)");
+            $('#record_text').text("錄 音...");
+        }else {
+            $('#record_status').css("background","url(../static/image/ic_stop_24px.png)");
+            $('#record_text').text("結 束... 60s");
+        }
+    }
+	elButton.onclick = function (){
+        if (isStart) {
+            time = 60;
+            //錄音
+            updateButton();
+            timer = setInterval(updateTimer, 1000);
+            recorder.start();
+        } else {
+            //停止
+            recorder && recorder.stop();
+            if (timer) clearInterval(timer);
+            updateButton();
+            uploadAudio();
+            recorder.play(audio);
+            recorder && recorder.clear();
+        }
+    };
+
+	window.onload = function init() {
+			HZRecorder.get(function (rec) {
+				recorder = rec;
+			});
+		};
+
+	function uploadAudio() {
+        var lang = $("#asr_lang option:selected").val();
+        recorder.upload(function (data) {
+            var fd = new FormData();
+			fd.append("audioData", data);
+            var url = "";
+            jQuery.ajax({
+                url : "https://aidemo.youdao.com/asr?lang="+lang, type : 'POST', async: false,
+                data : fd, processData : false, contentType : false,
+                success : function(res) {
+                    var result = eval("("+res+")");
+                    if (result.errorCode == "0") {
+						$("#inputText").html("");
+                        $("#inputText").html(result.result);
+                        $("#inputText").css("color","#222");
+                    }else if(result.errorCode==411){
+                        Toast.toast("訪問過於頻繁");
+                    }else if(result.errorCode==413){
+                        Toast.toast("次數已達上限");
+                    }else if(result.errorCode==410){
+                        Toast.toast("請稍後在回來");
+                    }else{
+                        Toast.toast("語音辨識失敗")
+                    }
+                },
+                error : function(error) {
+                    Toast.toast("上傳失敗");
+                }
+            });
+        });
+    }
+
+		// 註冊聲紋
+		function speechRecorder() {
+			var printName = get("printName").value;
+			console.log("開始註冊......")
+			alert("提醒！錄音長度請不要低於 10s ！")
+			$.ajax(
+			{
+				type: "POST",
+				url: "http://140.125.85.35:3000/speech",
+				data: "printNames=" + printName,
+				dataType: "json",
+				error: function(request) {
+					return;
+				},
+				beforeSend: function(XMLHttpRequest) {
+					$(".text-white").css('display','none');
+					$("#ASR-Reslut").css('display','none');
+					layer.msg('錄音中......', {
+					  icon: 16,
+					  shade: 0.01
+					});
+				},
+				success: function(res) {
+					$("#RecoName").text( "註冊成功！！！ 註冊名稱為： " + printName)
+					printName = ''
+					//關閉
+					setTimeout(function(){
+					  layer.closeAll('loading');
+					}, 1000);	
+					return;		  			
+				}
+			});
+		}
+
+		function recognizeSpeech() {
+			alert("錄製語音 3~5s左右！")
+			$.ajax(
+			{
+				type: "POST",
+				url: "/recognize",
+				dataType: "text",
+				error: function(request) {
+					return;
+				},
+				beforeSend: function(XMLHttpRequest) {
+					layer.msg('開始錄音......', {
+					  icon: 16,
+					  shade: 0.01
+					});
+				},
+				success: function(res1) {
+					layer.msg('正在辨識......', {
+					  icon: 16,
+					  shade: 0.01
+					});
+					$("#recogName").text( "識別說話者為： " + res1)				
+				},
+			})					
+		}
+
+		function clifSpeech() {
+			$.ajax(
+			{
+				type: "POST",
+				url: "/clif",
+				dataType: "text",
+				error: function(request) {
+					return;
+				},
+				success: function(res2) {
+					layer.msg('正在辨識......', {
+					  icon: 16,
+					  shade: 0.01
+					});
+					$("#clifName").text( "識別語音分類： " + res2)				
+				},
+			})					
+		}
+
+		function textgt() {
+			$.ajax(
+			{
+				type: "POST",
+				url: "/gtest",
+				dataType: "text",
+				error: function(request) {
+					return;
+				},
+				success: function(res) {
+					$("#RecoName").text( "範本： " + res)
+				}
+			})
+		}
+
+		function textgt1() {
+			$.ajax(
+			{
+				type: "POST",
+				url: "/gtest1",
+				dataType: "text",
+				error: function(request) {
+						return;
+				},
+				success: function(res) {
+					$("#RecoName").text( "範本： " + res)
+				}
+			})		
+		}
+	</script>
+</body>
+</html>
